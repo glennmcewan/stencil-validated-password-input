@@ -9,53 +9,32 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+  interface ValidatedPasswordInput {
+    'isValid': () => Promise<boolean>;
+    'name': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLValidatedPasswordInputElement extends Components.ValidatedPasswordInput, HTMLStencilElement {}
+  var HTMLValidatedPasswordInputElement: {
+    prototype: HTMLValidatedPasswordInputElement;
+    new (): HTMLValidatedPasswordInputElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'validated-password-input': HTMLValidatedPasswordInputElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+  interface ValidatedPasswordInput extends JSXBase.HTMLAttributes<HTMLValidatedPasswordInputElement> {
+    'name'?: string;
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'validated-password-input': ValidatedPasswordInput;
   }
 }
 
