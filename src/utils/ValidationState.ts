@@ -1,17 +1,13 @@
 export class ValidationState {
   private _isValid: boolean;
-  private _errors: [];
+  private _errors: string[];
 
-  constructor(_isValid: boolean, _errors?: []) {
+  constructor(_isValid: boolean = false, _errors: string[] = []) {
     this._isValid = _isValid;
     this._errors = _errors;
   }
 
   get errors() {
-    if (typeof this._errors === 'undefined') {
-      return this.getDefaultErrors();
-    }
-
     return this._errors;
   }
 
@@ -19,10 +15,7 @@ export class ValidationState {
     return this._isValid;
   }
 
-  private getDefaultErrors() {
-    return [
-      'Error 1',
-      'Error 2',
-    ];
+  hasErrors() {
+    return this._errors.length > 0;
   }
 }

@@ -4,13 +4,14 @@ import { ValidationState } from '../../utils/ValidationState';
 
 @Component({
   tag: 'validated-password-input',
-  styleUrl: 'validated-password-input.css',
+  styleUrl: 'validated-password-input.scss',
   shadow: true
 })
 export class ValidatedPasswordInput {
   private service: PasswordValidator = new PasswordValidator;
 
   @Prop() name: string = 'name';
+  @Prop() placeholder: string = 'Enter your password';
 
   @State() value: string = '';
   @State() state: ValidationState;
@@ -22,7 +23,7 @@ export class ValidatedPasswordInput {
   }
 
   componentWillLoad() {
-    this.state = new ValidationState(false);
+    this.state = new ValidationState();
   }
 
   private handleKeyUp(event: KeyboardEvent) {
@@ -34,14 +35,15 @@ export class ValidatedPasswordInput {
 
   render() {
     return (
-      <div>
+      <div class={this.state.hasErrors() ? 'has-errors' : ''}>
         <label htmlFor={this.name}>Password</label>
-        <input type="password" name={this.name} onKeyUp={(event: KeyboardEvent) => this.handleKeyUp(event)} />
-        {
-          !this.state.isValid
-            ? <ul>{this.state.errors.map(message => <li>{message}</li>)}</ul>
-            : ''
-        }
+        <input
+          type="password"
+          name={this.name}
+          placeholder={this.placeholder}
+          onKeyUp={(event: KeyboardEvent) => this.handleKeyUp(event)}
+        />
+        <ul class="errors">{this.state.errors.map(message => <li>{message}</li>)}</ul>
       </div>
     );
   }

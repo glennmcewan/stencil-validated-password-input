@@ -12,6 +12,7 @@ export namespace Components {
   interface ValidatedPasswordInput {
     'isValid': () => Promise<boolean>;
     'name': string;
+    'placeholder': string;
   }
 }
 
@@ -31,6 +32,7 @@ declare global {
 declare namespace LocalJSX {
   interface ValidatedPasswordInput extends JSXBase.HTMLAttributes<HTMLValidatedPasswordInputElement> {
     'name'?: string;
+    'placeholder'?: string;
   }
 
   interface IntrinsicElements {
