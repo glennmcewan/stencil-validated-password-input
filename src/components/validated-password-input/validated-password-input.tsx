@@ -30,7 +30,13 @@ export class ValidatedPasswordInput {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
 
-    this.isValid().then(value => console.log(value));
+    this.isValid();
+  }
+
+  private renderFeedbackFragment() {
+    if (this.state.hasErrors()) {
+      return <ul class="errors">{this.state.errors.map(message => <li>{message}</li>)}</ul>;
+    }
   }
 
   render() {
@@ -43,7 +49,7 @@ export class ValidatedPasswordInput {
           placeholder={this.placeholder}
           onKeyUp={(event: KeyboardEvent) => this.handleKeyUp(event)}
         />
-        <ul class="errors">{this.state.errors.map(message => <li>{message}</li>)}</ul>
+        {this.renderFeedbackFragment()}
       </div>
     );
   }
