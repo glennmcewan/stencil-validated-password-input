@@ -54,6 +54,8 @@ describe('validated-password-input', () => {
 
     expect(await input.getProperty('value')).toEqual('');
 
+    await page.waitForChanges();
+
     const errors = await page.findAll('validated-password-input >>> .errors li');
 
     expect(errors.length).toEqual(3);
@@ -71,6 +73,8 @@ describe('validated-password-input', () => {
     await input.type('Waffle1');
 
     expect(await input.getProperty('value')).toEqual('Waffle1');
+
+    await page.waitForChanges();
 
     const errors = await page.findAll('validated-password-input >>> .errors');
 
